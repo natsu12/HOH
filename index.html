@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>在线秒表_在线计时器_秒表计时器 - 多事通手机版</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+    <meta content="在线秒表手机版提供秒表,在线秒表,在线计时器,免费在线秒表,免费flash秒表,秒表计时器,精准秒表。" name="Description">
+    <meta content="秒表,在线秒表,在线计时器,免费在线秒表,免费flash秒表,秒表计时器" name="Keywords">
+    <link href="http://www.duoshitong.com/m/css/duoshitong_m.css" rel="stylesheet" type="text/css">
+    <link href="duoshitong.miaobiao.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <section class="body">
+    <div class="module calendar">
+          <div class="btitle">
+<form name="stopwatch" id="stopwatch" title="Stopwatch">
+
+<input class="bt lvse" type="button" onClick="stopstart()" onFocus="this.blur()" name="startstopbutton" id="startstopbutton" title="开 始 / 停 止" value="开 始" /><div style='height:5px;'></div>
+<input class="bt lanse" type="button" onClick="dosplit()" onFocus="this.blur()" name="splitbutton" id="splitbutton" title="分 割" value="分 割" /><div style='height:5px;'></div>
+<input class="bt huise" type="button" name="disp" id="disp" title="秒 表" /><div style='height:5px;'></div>
+<input class="bt zise" type="button" onClick="reset_it()" onFocus="this.blur()" name="resetbutton" id="resetbutton" title="清 除" value="清 除" /><div style='height:5px;'></div>
+
+</form>   
+<p id="split"></p>
+<p id="time">开始时间：</p>
+<script type="text/javascript">
+var t = [0, 0, 0, 0, 0, 0, 0, 1];
+var firstsplitflag = 0;
+var splittime;
+function stopstart() {
+t[t[2]] = (new Date()).valueOf();
+t[2] = 1 - t[2];
+if (0 == t[2]) {
+clearInterval(t[4]);
+t[3] += t[1] - t[0];
+document.getElementById("startstopbutton").value = "\u5f00 \u59cb";
+document.getElementById("split").innerHTML += (t[7]++) + "．\u505c\u6b62: " + format(t[1] - t[0]) + "<br />";
+t[4] = t[1] = t[0] = 0;
+disp();
+firstsplitflag = 0
+} else {
+document.getElementById("startstopbutton").value = "\u505c \u6b62";
+t[4] = setInterval(disp, 43)
+}
+}
+function dosplit() {
+if (0 !== t[2]) {
+document.getElementById("split").innerHTML += (t[7]++) + "．分割: " + format(t[1] - t[0]) + "<br />"
+}
+}
+var myDate = new Date();
+document.getElementById("time").innerHTML += myDate.toLocaleTimeString();
+function reset_it() {
+if (t[2]) {
+stopstart()
+}
+t[4] = t[3] = t[2] = t[1] = t[0] = 0;
+disp();
+document.getElementById("split").innerHTML = "";
+t[7] = 1
+}
+function disp() {
+if (t[2]) {
+t[1] = (new Date()).valueOf()
+}
+t[6].value = format(t[3] + t[1] - t[0])
+}
+function format(b) {
+var c = new Date(b + t[5]).toString().replace(/.*([0-9][0-9]:[0-9][0-9]:[0-9][0-9]).*/, "$1");
+var a = String(b % 1000);
+while (a.length < 3) {
+a = "0" + a
+}
+c += "." + a;
+return c
+}
+function load() {
+t[5] = new Date(1970, 1, 1, 0, 0, 0, 0).valueOf();
+t[6] = document.getElementById("disp");
+disp()
+}
+load();
+</script>
+
+ </div>
+      </section>
+<!-- fix begin -->
+  <script type="text/javascript">
+    var fixParam = {
+      share:true,
+      indexPage:""
+    };
+    FIX.init(fixParam);
+  </script>
+<!-- fix end -->
+</div>
+  </body>
+</html>
